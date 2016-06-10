@@ -5,8 +5,14 @@
  */
 package jbb.oh.controls;
 
+import fr.oh.daos.DAOGeneric;
+import fr.oh.entities.Produit;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,8 +34,21 @@ public class AnnonceCTRL extends HttpServlet {
             /**
              * Ici ma requete pour les demandes
              */
+            DAOGeneric<Produit> daoproduit;
+            try {
+                String mdp = "a";
 
-            req.setAttribute("type", type);
+                TreeMap<String, String> map = new TreeMap<String, String>();
+                map.put("typeProduit", "1");
+                daoproduit = new DAOGeneric<Produit>(new Produit());
+                List<Produit> produit = daoproduit.findby(map);
+                req.setAttribute("Annonce", produit);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(AnnonceCTRL.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(AnnonceCTRL.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             getServletContext().getRequestDispatcher("/WEB-INF/Annonce.jsp").forward(req, resp);
 
         } else {
@@ -37,6 +56,21 @@ public class AnnonceCTRL extends HttpServlet {
             /**
              * Ici ma requete avec offres
              */
+          
+            DAOGeneric<Produit> daoproduit;
+            try {
+
+                TreeMap<String, String> map = new TreeMap<String, String>();
+                map.put("typeProduit", "2");
+                daoproduit = new DAOGeneric<Produit>(new Produit());
+                List<Produit> produit = daoproduit.findby(map);
+                req.setAttribute("Annonce", produit);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(AnnonceCTRL.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(AnnonceCTRL.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             getServletContext().getRequestDispatcher("/WEB-INF/Annonce.jsp").forward(req, resp);
 
         }

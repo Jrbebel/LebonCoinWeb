@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
 public class ConnexionCTRL extends HttpServlet {
 
     public static final String ATT_SESSION_USER = "sessionUtilisateur";
+    public static final String ATT_SESSION_USER_ID = "idUtilisateur";
     public static final String VUE = "/index.jsp";
 
     @Override
@@ -41,7 +42,7 @@ public class ConnexionCTRL extends HttpServlet {
         try {
             String mdp = req.getParameter("mdp"); // recupere le mot de passe
             String email = req.getParameter("email"); //recupere l'email 
-            System.out.println("mdp" + mdp);
+
             /**
              * On verifie si les deux chamsp sont rempli*
              */
@@ -57,7 +58,6 @@ public class ConnexionCTRL extends HttpServlet {
              * On cree une session si il est bien connecté*
              */
             /* Mise en session d'une chaîne de caractères */
-            HttpSession session = req.getSession();//je cree ma session
 
             TreeMap<String, String> map = new TreeMap<String, String>();
             map.put("emailClient", email);
@@ -70,13 +70,12 @@ public class ConnexionCTRL extends HttpServlet {
                 req.setAttribute("messageErreur", "Mot de passe ou login incorect");
                 getServletContext().getRequestDispatcher(VUE).forward(req, resp);
             } else { //requete bonne 
-
+                HttpSession session = req.getSession();//je cree ma session
                 String user = "UserConnexion";
-                session.setAttribute("Nom", clients.getNomClient());
-                session.setAttribute("Prenom", clients.getPrenomClient());
-                req.setAttribute("messageErreur", "Mot de passe ou login incorect");
 
-                getServletContext().getRequestDispatcher(VUE).forward(req, resp);
+                session.setAttribute(ATT_SESSION_USER, clients.getNomClient() + " " + clients.getPrenomClient());
+                session.setAttribute(ATT_SESSION_USER_ID, clients.getIdClient());
+                        getServletContext().getRequestDispatcher(VUE).forward(req, resp);
             }
 
         } catch (InstantiationException ex) {

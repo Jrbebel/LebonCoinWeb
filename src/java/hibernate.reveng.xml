@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="leboncoin"/>
+  <table-filter match-name="region"/>
+  <table-filter match-name="pays"/>
+  <table-filter match-name="categorie_produit"/>
+  <table-filter match-name="sous_categorie_produit"/>
+  <table-filter match-name="produit"/>
+  <table-filter match-name="ville"/>
+  <table-filter match-name="departement"/>
+  <table-filter match-name="client"/>
+  <table-filter match-name="categorie_client"/>
+</hibernate-reverse-engineering>

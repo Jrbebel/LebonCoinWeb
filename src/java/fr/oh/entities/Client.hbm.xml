@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18 mai 2016 11:27:54 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="fr.oh.entities.Client" table="CLIENT" catalog="leboncoin">
+        <id name="idClient" type="java.lang.Integer">
+            <column name="ID_CLIENT" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="categorieClient" class="fr.oh.entities.CategorieClient" fetch="select">
+            <column name="ID_CATEGORIE_CLIENT" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ville" class="fr.oh.entities.Ville" fetch="select">
+            <column name="ID_VILLE" not-null="true" />
+        </many-to-one>
+        <property name="nomClient" type="string">
+            <column name="NOM_CLIENT" length="50" not-null="true" />
+        </property>
+        <property name="prenomClient" type="string">
+            <column name="PRENOM_CLIENT" length="50" />
+        </property>
+        <property name="telephoneClient" type="string">
+            <column name="TELEPHONE_CLIENT" length="20" />
+        </property>
+        <property name="emailClient" type="string">
+            <column name="EMAIL_CLIENT" length="20" not-null="true" />
+        </property>
+        <property name="adresseClient" type="string">
+            <column name="ADRESSE_CLIENT" length="100" not-null="true" />
+        </property>
+        <property name="latitudeClient" type="java.lang.Float">
+            <column name="LATITUDE_CLIENT" precision="12" scale="0" />
+        </property>
+        <property name="longitudeClient" type="java.lang.Float">
+            <column name="LONGITUDE_CLIENT" precision="12" scale="0" />
+        </property>
+        <property name="pseudoClient" type="string">
+            <column name="PSEUDO_CLIENT" length="50" not-null="true" />
+        </property>
+        <property name="mdpClient" type="string">
+            <column name="MDP_CLIENT" length="50" not-null="true" />
+        </property>
+        <property name="visibiliteInfos" type="java.lang.Short">
+            <column name="VISIBILITE_INFOS" />
+        </property>
+        <property name="siretClient" type="string">
+            <column name="SIRET_CLIENT" length="50" />
+        </property>
+        <set name="produitsForCliIdClient" table="produit" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CLI_ID_CLIENT" />
+            </key>
+            <one-to-many class="fr.oh.entities.Produit" />
+        </set>
+        <set name="produitsForIdClient" table="produit" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_CLIENT" />
+            </key>
+            <one-to-many class="fr.oh.entities.Produit" />
+        </set>
+    </class>
+</hibernate-mapping>

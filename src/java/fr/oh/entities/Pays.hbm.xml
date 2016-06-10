@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18 mai 2016 11:27:54 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="fr.oh.entities.Pays" table="pays" catalog="leboncoin">
+        <id name="idPays" type="java.lang.Integer">
+            <column name="ID_PAYS" />
+            <generator class="identity" />
+        </id>
+        <property name="nomPays" type="string">
+            <column name="NOM_PAYS" length="50" not-null="true" unique="true" />
+        </property>
+        <property name="codePays" type="string">
+            <column name="CODE_PAYS" length="5" not-null="true" unique="true" />
+        </property>
+        <property name="codeIso3Pays" type="string">
+            <column name="CODE_ISO3_PAYS" length="3" not-null="true" unique="true" />
+        </property>
+        <set name="regions" table="region" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_PAYS" not-null="true" />
+            </key>
+            <one-to-many class="fr.oh.entities.Region" />
+        </set>
+    </class>
+</hibernate-mapping>

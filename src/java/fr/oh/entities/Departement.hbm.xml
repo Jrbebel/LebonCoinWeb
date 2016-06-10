@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18 mai 2016 11:27:54 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="fr.oh.entities.Departement" table="departement" catalog="leboncoin">
+        <id name="idDepartement" type="java.lang.Integer">
+            <column name="ID_DEPARTEMENT" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="region" class="fr.oh.entities.Region" fetch="select">
+            <column name="ID_REGION" not-null="true" />
+        </many-to-one>
+        <property name="codeDepartement" type="string">
+            <column name="CODE_DEPARTEMENT" length="5" not-null="true" unique="true" />
+        </property>
+        <property name="nomDepartement" type="string">
+            <column name="NOM_DEPARTEMENT" length="50" not-null="true" unique="true" />
+        </property>
+        <set name="villes" table="ville" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_DEPARTEMENT" not-null="true" />
+            </key>
+            <one-to-many class="fr.oh.entities.Ville" />
+        </set>
+    </class>
+</hibernate-mapping>

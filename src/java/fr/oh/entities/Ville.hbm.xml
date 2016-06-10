@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18 mai 2016 11:27:54 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="fr.oh.entities.Ville" table="VILLE" catalog="leboncoin">
+        <id name="idVille" type="java.lang.Integer">
+            <column name="ID_VILLE" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="departement" class="fr.oh.entities.Departement" fetch="select">
+            <column name="ID_DEPARTEMENT" not-null="true" />
+        </many-to-one>
+        <property name="nomVille" type="string">
+            <column name="NOM_VILLE" length="50" not-null="true" />
+        </property>
+        <property name="latitudeVille" type="float">
+            <column name="LATITUDE_VILLE" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="longitudeVille" type="float">
+            <column name="LONGITUDE_VILLE" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="cpVille" type="string">
+            <column name="CP_VILLE" length="5" not-null="true" />
+        </property>
+        <set name="clients" table="client" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_VILLE" not-null="true" />
+            </key>
+            <one-to-many class="fr.oh.entities.Client" />
+        </set>
+    </class>
+</hibernate-mapping>

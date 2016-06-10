@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18 mai 2016 11:27:54 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="fr.oh.entities.Produit" table="PRODUIT" catalog="leboncoin">
+        <id name="idProduit" type="java.lang.Integer">
+            <column name="ID_PRODUIT" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="clientByCliIdClient" class="fr.oh.entities.Client" fetch="select">
+            <column name="CLI_ID_CLIENT" />
+        </many-to-one>
+        <many-to-one name="sousCategorieProduit" class="fr.oh.entities.SousCategorieProduit" fetch="select">
+            <column name="ID_SOUS_CATEGORIE_PRODUIT" not-null="true" />
+        </many-to-one>
+        <many-to-one name="clientByIdClient" class="fr.oh.entities.Client" fetch="select">
+            <column name="ID_CLIENT" />
+        </many-to-one>
+        <property name="designationProduit" type="string">
+            <column name="DESIGNATION_PRODUIT" length="50" not-null="true" />
+        </property>
+        <property name="prixProduit" type="float">
+            <column name="PRIX_PRODUIT" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="dateMiseEnVenteProduit" type="timestamp">
+            <column name="DATE_MISE_EN_VENTE_PRODUIT" length="19" not-null="true" />
+        </property>
+        <property name="descriptionProduit" type="string">
+            <column name="DESCRIPTION_PRODUIT" length="1000" />
+        </property>
+    </class>
+</hibernate-mapping>
